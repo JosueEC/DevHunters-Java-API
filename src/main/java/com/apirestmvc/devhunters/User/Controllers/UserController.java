@@ -45,7 +45,7 @@ public class UserController {
 	
 	// * http://localhost:3001/api/v1/user/:userID [DELETE]
 	@DeleteMapping(path = "{userID}")
-	public String deleteUser () {
-		return "DELETE user";
+	public ResponseEntity<Object> deleteUser (@PathVariable("userID") Long id) {
+		return userService.deleteUser(id);
 	}
 }

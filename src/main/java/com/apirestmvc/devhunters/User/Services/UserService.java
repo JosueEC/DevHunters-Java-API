@@ -60,7 +60,17 @@ public class UserService {
 		return httpHandler.send("Usuario actualizado con exito", HttpStatus.ACCEPTED, user);
 	}
 	
-	public void deleteUser () {
-	
+	public ResponseEntity<Object> deleteUser (Long id) {
+		if (id == null || id <= 0) {
+			return httpHandler.send("El ID del usuario es requerido", HttpStatus.BAD_REQUEST);
+		}
+		
+		Optional<User> check = userRepository.findById(id);
+		if (check.isEmpty()) {
+			return httpHandler.send("El usuario no existe", HttpStatus.NOT_FOUND);
+		}
+		
+		userRepository.deleteById(id);
+		return httpHandler.send("Usuario eliminado exitosamente", HttpStatus.OK, check.get());
 	}
 }
