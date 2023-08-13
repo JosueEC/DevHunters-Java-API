@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/v1/user")
@@ -38,10 +37,10 @@ public class UserController {
 		return userService.insertUser(user);
 	}
 	
-	// * http://localhost:3001/api/v1/user/:userID [PUT]
-	@PutMapping(path = "{userID}")
-	public String putUser () {
-		return "PUT user";
+	// * http://localhost:3001/api/v1/user [PUT]
+	@PutMapping
+	public ResponseEntity<Object> putUser (@RequestBody User user) {
+		return userService.updateUser(user);
 	}
 	
 	// * http://localhost:3001/api/v1/user/:userID [DELETE]

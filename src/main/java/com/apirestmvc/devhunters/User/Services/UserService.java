@@ -46,8 +46,18 @@ public class UserService {
 		return httpHandler.send("Usuario creado con exito", HttpStatus.CREATED, user);
 	}
 	
-	public void updateUser () {
-	
+	public ResponseEntity<Object> updateUser (User user) {
+		if (user.getId() == null || user.getId() <= 0) {
+			return httpHandler.send("El ID del usuario es requerido", HttpStatus.BAD_REQUEST);
+		}
+		
+		Optional<User> check = userRepository.findById(user.getId());
+		if (check.isEmpty()) {
+			return httpHandler.send("El usuario no existe", HttpStatus.NOT_FOUND);
+		}
+		
+		userRepository.save(user);
+		return httpHandler.send("Usuario actualizado con exito", HttpStatus.ACCEPTED, user);
 	}
 	
 	public void deleteUser () {
