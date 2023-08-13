@@ -6,16 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
 public class DevHuntersApp {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DevHuntersApp.class, args);
-	}
-	
-	@GetMapping(path = "/")
-	public String helloWorld() {
-		return "Hello World";
 	}
 
 }

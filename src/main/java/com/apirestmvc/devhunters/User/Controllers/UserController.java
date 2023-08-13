@@ -1,0 +1,52 @@
+package com.apirestmvc.devhunters.User.Controllers;
+
+import com.apirestmvc.devhunters.User.Models.User;
+import com.apirestmvc.devhunters.User.Services.UserService;
+import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(path = "/api/v1/user")
+public class UserController {
+	private final UserService userService;
+	
+	@Autowired
+	public UserController (UserService userService) {
+		this.userService = userService;
+	}
+	
+	// * http://localhost:3001/api/v1/user [GET]
+	@GetMapping
+	public List<User> getUsers () {
+		return userService.findUsers();
+	}
+	
+	// * http://localhost:3001/api/v1/user/:userID [GET]
+	@GetMapping(path = "{userID}")
+	public ResponseEntity<Object> getUser (@PathVariable("userID") Long id) {
+		return userService.findOneUser(id);
+	}
+	
+	// * http://localhost:3001/api/v1/user [POST]
+	@PostMapping
+	public ResponseEntity<Object> postUser (@RequestBody User user) {
+		return userService.insertUser(user);
+	}
+	
+	// * http://localhost:3001/api/v1/user/:userID [PUT]
+	@PutMapping(path = "{userID}")
+	public String putUser () {
+		return "PUT user";
+	}
+	
+	// * http://localhost:3001/api/v1/user/:userID [DELETE]
+	@DeleteMapping(path = "{userID}")
+	public String deleteUser () {
+		return "DELETE user";
+	}
+}
