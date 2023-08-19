@@ -1,5 +1,6 @@
-package com.apirestmvc.devhunters.Auth;
+package com.apirestmvc.devhunters.Auth.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data // Crea los getters y setter de las propiedades de la clase
 @Builder // Nos permite la creacion de objetos/instancias de la clase
 @NoArgsConstructor // No crea el constructor vacio (sin argumentos)
+@AllArgsConstructor
 public class LoginRequest {
 	private String username;
 	private String password;

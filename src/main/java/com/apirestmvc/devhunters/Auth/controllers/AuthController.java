@@ -1,6 +1,7 @@
-package com.apirestmvc.devhunters.Auth;
+package com.apirestmvc.devhunters.Auth.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

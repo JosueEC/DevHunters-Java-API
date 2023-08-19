@@ -1,4 +1,4 @@
-package com.apirestmvc.devhunters.Auth;
+package com.apirestmvc.devhunters.Auth.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

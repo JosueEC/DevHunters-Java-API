@@ -1,5 +1,7 @@
-package com.apirestmvc.devhunters.Demo.User;
+package com.apirestmvc.devhunters.Demo.User.controllers;
 
+import com.apirestmvc.devhunters.Demo.User.models.User;
+import com.apirestmvc.devhunters.Demo.User.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

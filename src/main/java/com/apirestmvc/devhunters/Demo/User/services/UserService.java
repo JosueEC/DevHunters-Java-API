@@ -1,6 +1,8 @@
-package com.apirestmvc.devhunters.Demo.User;
+package com.apirestmvc.devhunters.Demo.User.services;
 
 import com.apirestmvc.devhunters.Demo.User.Helpers.HttpHandler;
+import com.apirestmvc.devhunters.Demo.User.models.User;
+import com.apirestmvc.devhunters.Demo.User.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
