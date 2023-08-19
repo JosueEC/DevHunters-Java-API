@@ -1,6 +1,6 @@
-package com.apirestmvc.devhunters.User.Repository;
+package com.apirestmvc.devhunters.Demo.User;
 
-import com.apirestmvc.devhunters.User.Models.User;
+import com.apirestmvc.devhunters.Demo.User.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

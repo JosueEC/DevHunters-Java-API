@@ -1,6 +1,6 @@
-package com.apirestmvc.devhunters.User.Helpers;
+package com.apirestmvc.devhunters.Demo.User.Helpers;
 
-import com.apirestmvc.devhunters.User.Models.User;
+import com.apirestmvc.devhunters.Demo.User.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

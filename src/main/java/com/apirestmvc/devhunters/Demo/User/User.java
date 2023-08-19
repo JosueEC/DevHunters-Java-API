@@ -1,4 +1,4 @@
-package com.apirestmvc.devhunters.User.Models;
+package com.apirestmvc.devhunters.Demo.User;
 
 import jakarta.persistence.*;
 

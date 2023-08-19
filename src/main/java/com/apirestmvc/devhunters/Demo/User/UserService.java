@@ -1,14 +1,11 @@
-package com.apirestmvc.devhunters.User.Services;
+package com.apirestmvc.devhunters.Demo.User;
 
-import com.apirestmvc.devhunters.User.Helpers.HttpHandler;
-import com.apirestmvc.devhunters.User.Models.User;
-import com.apirestmvc.devhunters.User.Repository.UserRepository;
+import com.apirestmvc.devhunters.Demo.User.Helpers.HttpHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 

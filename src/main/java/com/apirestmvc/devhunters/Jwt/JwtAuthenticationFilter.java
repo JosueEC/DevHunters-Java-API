@@ -19,13 +19,20 @@ import java.io.IOException;
 @SuppressWarnings("ALL")
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+	/*
+	 Esta clase el la forma en la que podemos crear un filtro personalizado
+	 de autenticacion. Spring Security trabaja como el patron de comportamiento
+	 "Cadena de Responsabilidad", estos metodos son como los middlewares en Express
+	 por aqui pasa la request, la response y el filterchain, el cual es como la
+	 funcion next en Express, que en este caso haria la funcion de pasar al
+	 siguiente filtro
+	*/
 	
 	/*
-	 Esta funcion controla el proceso del flujo que realiza Spring
-	 security para autenticar a un usuarios, en el caso de que el
-	 token venga vacio se trata de un registro, por lo que lo
-	 pasamos al siguiente filtro. Caso contrario es un logeo, por lo
-	 que igualmente lo pasamos al siguiente filtro
+	 En esta funcion podemos ejecutar el codigo que queremos que se ejecute cuando
+	 pasa la request por el filtro, en este caso, revisamos si la peticion no tiene
+	 token, entonces se trata de un registro. y lo enviamos al siguiente filtro, caso
+	 contrario
 	*/
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -40,8 +47,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	}
 	
 	/*
-	 Esta funcion obtiene el token desde la cabecera o header de la
-	 peticion http, la cual viene en el request de la peticion.
+	 Esta funcion es la que obtiene el token que viene en el header de la
+	 request. Se verifica que el token no venga vacio y que empieze con la
+	 palabra Bearer, si es asi, se recorta solo el token y se retorna, caso
+	 contrario devuelve null
 	*/
 	private String getTokenFromRequest(HttpServletRequest request) {
 		final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
