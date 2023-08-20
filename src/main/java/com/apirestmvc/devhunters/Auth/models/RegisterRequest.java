@@ -1,6 +1,5 @@
 package com.apirestmvc.devhunters.Auth.models;
 
-import com.apirestmvc.devhunters.Demo.User.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +21,4 @@ public class RegisterRequest {
 	private String firstname;
 	private String lastname;
 	private String country;
-	private Role role;
 }
