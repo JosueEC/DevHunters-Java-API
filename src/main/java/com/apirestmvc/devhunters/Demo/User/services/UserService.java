@@ -1,6 +1,6 @@
 package com.apirestmvc.devhunters.Demo.User.services;
 
-import com.apirestmvc.devhunters.Demo.User.Helpers.HttpHandler;
+import com.apirestmvc.devhunters.Demo.User.helpers.ServerResponse;
 import com.apirestmvc.devhunters.Demo.User.models.User;
 import com.apirestmvc.devhunters.Demo.User.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import java.util.Optional;
 @Service
 public class UserService {
 	private final UserRepository userRepository;
-	private HttpHandler httpHandler = new HttpHandler();
 	
 	@Autowired
 	public UserService (UserRepository userRepository) {
@@ -26,50 +25,50 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	public ResponseEntity<Object> findOneUser (Long id) {
+	public ResponseEntity<ServerResponse> findOneUser (Long id) {
 		Optional<User> user = userRepository.findById(id);
 		if (user.isEmpty()) {
-			return httpHandler.send("El usuario no existe", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ServerResponse>(new ServerResponse("USER_NOT_FOUND"), HttpStatus.NOT_FOUND);
 		}
-		return httpHandler.send("Usuario encontrado", HttpStatus.FOUND, user.get());
+		return new ResponseEntity<ServerResponse>(new ServerResponse(user), HttpStatus.FOUND);
 	}
 	
-	public ResponseEntity<Object> insertUser (User user) {
+	public ResponseEntity<ServerResponse> insertUser (User user) {
 		Optional<User> check = userRepository.findByEmail(user.getEmail());
 		
 		if (check.isPresent()) {
-			return httpHandler.send("El usuario " + check.get().getEmail() + "ya existe", HttpStatus.CONFLICT);
+			return new ResponseEntity<ServerResponse>(new ServerResponse("USER_ALREADY_EXISTS"), HttpStatus.CONFLICT);
 		}
 		
 		userRepository.save(user);
-		return httpHandler.send("Usuario creado con exito", HttpStatus.CREATED, user);
+		return new ResponseEntity<ServerResponse>(new ServerResponse(user), HttpStatus.ACCEPTED);
 	}
 	
-	public ResponseEntity<Object> updateUser (User user) {
+	public ResponseEntity<ServerResponse> updateUser (User user) {
 		if (user.getId() == null || user.getId() <= 0) {
-			return httpHandler.send("El ID del usuario es requerido", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<ServerResponse>(new ServerResponse("BAD_REQUEST"), HttpStatus.BAD_REQUEST);
 		}
 		
 		Optional<User> check = userRepository.findById(user.getId());
 		if (check.isEmpty()) {
-			return httpHandler.send("El usuario no existe", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ServerResponse>(new ServerResponse("USER_NOT_FOUND"), HttpStatus.NOT_FOUND);
 		}
 		
 		userRepository.save(user);
-		return httpHandler.send("Usuario actualizado con exito", HttpStatus.ACCEPTED, user);
+		return new ResponseEntity<ServerResponse>(new ServerResponse(user), HttpStatus.ACCEPTED);
 	}
 	
-	public ResponseEntity<Object> deleteUser (Long id) {
+	public ResponseEntity<ServerResponse> deleteUser (Long id) {
 		if (id == null || id <= 0) {
-			return httpHandler.send("El ID del usuario es requerido", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<ServerResponse>(new ServerResponse("BAD_REQUEST"), HttpStatus.BAD_REQUEST);
 		}
 		
 		Optional<User> check = userRepository.findById(id);
 		if (check.isEmpty()) {
-			return httpHandler.send("El usuario no existe", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ServerResponse>(new ServerResponse("USER_NOT_FOUND"), HttpStatus.NOT_FOUND);
 		}
 		
 		userRepository.deleteById(id);
-		return httpHandler.send("Usuario eliminado exitosamente", HttpStatus.OK, check.get());
+		return new ResponseEntity<ServerResponse>(new ServerResponse(check.get()), HttpStatus.OK);
 	}
 }
