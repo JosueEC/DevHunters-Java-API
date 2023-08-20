@@ -1,5 +1,6 @@
 package com.apirestmvc.devhunters.Auth.models;
 
+import com.apirestmvc.devhunters.Demo.User.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
  especificas, como las interfaces en TypeScript que nos permiten tipar
  las request y response de la funciones en los servicios
 */
+@SuppressWarnings("ALL")
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,4 +22,5 @@ public class RegisterRequest {
 	private String firstname;
 	private String lastname;
 	private String country;
+	private Role role;
 }
