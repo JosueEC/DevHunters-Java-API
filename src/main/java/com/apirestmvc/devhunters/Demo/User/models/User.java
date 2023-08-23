@@ -7,10 +7,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
+/*
+ La notacion @Builder de lombok, nos permite usar el patron builder para la
+ creacion de objetos de nuestra clase, esta es otra forma mas comoda de
+ instanciar objetos. Es lo mismo que si crearamos la clase builder dentro
+ de esta misma clase
+*/
 @SuppressWarnings("ALL")
 @Data
 @Builder
@@ -49,9 +57,10 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	Role role;
 	
+	// Este metodo retorna el rol del usuario logeado
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return List.of(new SimpleGrantedAuthority(role.name()));
 	}
 	
 	@Override
